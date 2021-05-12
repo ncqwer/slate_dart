@@ -1,22 +1,4 @@
-A library for Dart developers.
+A dart implemention for [slate](https://github.com/ianstormtaylor/slate)
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
-
-## Usage
-
-A simple usage example:
-
-```dart
-import 'package:slate_dart/slate_dart.dart';
-
-main() {
-  var awesome = new Awesome();
-}
-```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
+## Developing
+Current package is under development. Read [Todo](Todo.md) to get the lastest developments.
