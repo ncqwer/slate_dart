@@ -1,5 +1,5 @@
 # What
-本项目完成的ts项目（slate）的dart化。
+本项目完成的ts项目（[slate](https://github.com/ianstormtaylor/slate)）的dart化。
 
 # Why
 主要目的是在移动端使用网页端产生的slate数据格式来绘制移动端页面。
