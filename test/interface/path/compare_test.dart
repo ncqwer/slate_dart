@@ -23,7 +23,7 @@ void main() {
     expect(output, equals(-1));
   });
 
-  test('interface->path->compare->below2222', () {
+  test('interface->path->compare->below', () {
     final path = [
       0,
     ];
