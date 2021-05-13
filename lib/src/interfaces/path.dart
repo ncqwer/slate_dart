@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:slate_dart/src/error.dart';
 
+// 暂时缺is&&transform
+
 class Path {
   static int compare(List<int> lhs, List<int> rhs) {
     final minLength = min(lhs.length, rhs.length);
@@ -12,18 +14,24 @@ class Path {
     return 0;
   }
 
-  static List<List<int>> levels(List<int> path, {bool reverse = false}) {
+  static Iterable<List<int>> levels(List<int> path,
+      {bool reverse = false}) sync* {
     final list = <List<int>>[];
     for (var count = 0; count <= path.length; ++count) {
       list.add(path.sublist(0, count));
     }
-    return reverse ? List<List<int>>.from(list.reversed) : list;
+    if (reverse) {
+      yield* list.reversed;
+    } else {
+      yield* list;
+    }
   }
 
-  static List<List<int>> ancestors(List<int> path, {bool reverse = false}) {
-    final paths = levels(path, reverse: reverse);
-    if (!reverse) return paths.sublist(0, max(paths.length - 1, 0));
-    return paths.sublist(1);
+  static Iterable<List<int>> ancestors(List<int> path,
+      {bool reverse = false}) sync* {
+    final paths = List<List<int>>.from(levels(path, reverse: reverse));
+    if (!reverse) yield* paths.sublist(0, max(paths.length - 1, 0));
+    yield* paths.sublist(1);
   }
 
   static List<int> common(List<int> path, List<int> another) {
@@ -113,11 +121,43 @@ class Path {
 
   static List<int> next(List<int> path) {
     if (path.isEmpty) {
-      throw SlateBaseError(
+      throw SlateBaseException(
           'Cannot get the next path of a root path [$path], because it has no next index.');
     }
     return path.sublist(0, path.length - 1)..add(path.last + 1);
   }
+
+  static List<int> parent(List<int> path) {
+    if (path.isEmpty) {
+      throw SlateBaseException(
+          'Cannot get the parent path of the root path [$path].');
+    }
+    return path.sublist(0, path.length - 1);
+  }
+
+  static List<int> previous(List<int> path) {
+    if (path.isEmpty) {
+      throw SlateBaseException(
+          'Cannot get the previous path of a root path [$path], because it has no previous index.');
+    }
+    final last = path.last;
+    if (last <= 0) {
+      throw SlateBaseException(
+          'Cannot get the previous path of a first child path [$path] because it would result in a negative index.');
+    }
+    return path.sublist(0, path.length - 1)..add(last - 1);
+  }
+
+  static List<int> relative(List<int> path, List<int> ancestor) {
+    if (!Path.isAncestor(ancestor, path) && !Path.equals(path, ancestor)) {
+      throw SlateBaseException(
+          'Cannot get the relative path of [$path] inside ancestor [$ancestor], because it is not above or equal to the path.');
+    }
+
+    return path.sublist(ancestor.length);
+  }
+
+  // static
 }
 
 // void main() {

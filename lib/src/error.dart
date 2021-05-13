@@ -1,4 +1,4 @@
-class SlateBaseError implements Exception {
+class SlateBaseException implements Exception {
   final String message;
-  SlateBaseError(String msg) : message = msg;
+  SlateBaseException(String msg) : message = msg;
 }
