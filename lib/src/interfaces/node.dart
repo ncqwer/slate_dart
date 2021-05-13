@@ -46,7 +46,7 @@ abstract class Node {
     final n = Node.getFromPath(root, path);
     if (n is Text) {
       throw SlateBaseException(
-          'Cannot get the ancestor node at path [$path] because it refers to a text node instead: $n');
+          '1111Cannot get the ancestor node at path [$path] because it refers to a text node instead: $n');
     }
     return n as Ancestor;
   }
