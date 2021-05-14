@@ -4,6 +4,20 @@ import 'package:slate_dart/src/error.dart';
 
 // 暂时缺is&&transform
 
+extension ListExtension<T> on List<T> {
+  T? atIndex(int idx) {
+    if (idx >= length) return null;
+    return this[idx];
+  }
+
+  List<T> sublist_safe(int start, [int? end]) {
+    if (end == null) return sublist(start);
+    if (end < 0) return sublist(start, length + end);
+    if (end > length) return sublist(start);
+    return sublist(start, end);
+  }
+}
+
 class Path {
   static int compare(List<int> lhs, List<int> rhs) {
     final minLength = min(lhs.length, rhs.length);
@@ -18,7 +32,7 @@ class Path {
       {bool reverse = false}) sync* {
     final list = <List<int>>[];
     for (var count = 0; count <= path.length; ++count) {
-      list.add(path.sublist(0, count));
+      list.add(path.sublist_safe(0, count));
     }
     if (reverse) {
       yield* list.reversed;
@@ -30,8 +44,11 @@ class Path {
   static Iterable<List<int>> ancestors(List<int> path,
       {bool reverse = false}) sync* {
     final paths = List<List<int>>.from(levels(path, reverse: reverse));
-    if (!reverse) yield* paths.sublist(0, max(paths.length - 1, 0));
-    yield* paths.sublist(1);
+    if (!reverse) {
+      yield* paths.sublist_safe(0, -1);
+    } else {
+      yield* paths.sublist(1);
+    }
   }
 
   static List<int> common(List<int> path, List<int> another) {
@@ -57,24 +74,21 @@ class Path {
 
   static bool endsAfter(List<int> path, List<int> another) {
     final i = path.length - 1;
-    final ap = path.sublist(0, i);
-    final bp = another.sublist(0, i);
-    final av = path[i];
-    final bv = another[i];
-    return Path.equals(ap, bp) && av > bv;
+    final ap = path.sublist_safe(0, i);
+    final bp = another.sublist_safe(0, i);
+    return Path.equals(ap, bp) && path[i] > another[i];
   }
 
   static bool endsAt(List<int> path, List<int> another) {
-    return Path.equals(path, another.sublist(0, path.length));
+    return Path.equals(path, another.sublist_safe(0, path.length));
   }
 
   static bool endsBefore(List<int> path, List<int> another) {
     final i = path.length - 1;
-    final ap = path.sublist(0, i);
-    final bp = another.sublist(0, i);
-    final av = path[i];
-    final bv = another[i];
-    return Path.equals(ap, bp) && av < bv;
+    final ap = path.sublist_safe(0, i);
+    final bp = another.sublist_safe(0, i);
+
+    return Path.equals(ap, bp) && path[i] <another[i];
   }
 
   static bool isAfter(List<int> path, List<int> another) {
