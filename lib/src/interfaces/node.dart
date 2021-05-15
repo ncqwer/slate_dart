@@ -346,7 +346,7 @@ abstract class Node {
     final iter =
         Node.nodes(root, from: from, to: to, reverse: reverse, pass: pass);
     for (final i in iter) {
-      if (i.path is Text) yield NodeEntry(node: i.node, path: i.path);
+      if (i.node is Text) yield NodeEntry(node: i.node, path: i.path);
     }
   }
 }
