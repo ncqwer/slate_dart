@@ -7,50 +7,30 @@ abstract class Ancestor extends Node {
   abstract final List<Descendant> children;
 }
 
-class Text implements Descendant {
-  final String text;
-  @override
-  String? key;
+// class Element implements Descendant, Ancestor {
+//   @override
+//   Map<String, dynamic> data = {};
+//   @override
+//   String? key;
 
-  @override
-  Map<String, dynamic> data = {};
+//   @override
+//   final List<Descendant> children;
 
-  Text({this.text = '', this.key});
+//   Element({required this.children, this.key});
 
-  @override
-  bool operator ==(dynamic another) {
-    // assert(debugAssertIsValid());
-    if (identical(this, another)) return true;
-    if (another.runtimeType != runtimeType) return false;
-    if (key != null && another.key != null && key == another.key) return true;
-    return false;
-  }
-}
-
-class Element implements Descendant, Ancestor {
-  @override
-  Map<String, dynamic> data = {};
-  @override
-  String? key;
-
-  @override
-  final List<Descendant> children;
-
-  Element({required this.children, this.key});
-
-  @override
-  bool operator ==(dynamic another) {
-    // assert(debugAssertIsValid());
-    if (identical(this, another)) return true;
-    if (another.runtimeType != runtimeType) return false;
-    if (key != null && another.key != null && key == another.key) return true;
-    return false;
-  }
-}
+//   @override
+//   bool operator ==(dynamic another) {
+//     // assert(debugAssertIsValid());
+//     if (identical(this, another)) return true;
+//     if (another.runtimeType != runtimeType) return false;
+//     if (key != null && another.key != null && key == another.key) return true;
+//     return false;
+//   }
+// }
 
 class Editor implements Ancestor {
   @override
-  Map<String, dynamic> data = {};
+  Map<String, dynamic> data;
 
   @override
   String? key;
@@ -58,7 +38,7 @@ class Editor implements Ancestor {
   @override
   final List<Descendant> children;
 
-  Editor({required this.children, this.key});
+  Editor({required this.children, this.key, this.data = const {}});
 
   @override
   bool operator ==(dynamic another) {

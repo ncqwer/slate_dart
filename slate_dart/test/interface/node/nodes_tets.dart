@@ -69,8 +69,8 @@ void main() {
           NodeEntry(node: e as Node, path: []),
           // ignore: unnecessary_cast
           NodeEntry(node: e.children[0] as Node, path: [0]),
-          // ignore: unnecessary_cast
           NodeEntry(
+              // ignore: unnecessary_cast
               node: (e.children[0] as Ancestor).children[0] as Node,
               path: [0, 0]),
           // ignore: unnecessary_cast

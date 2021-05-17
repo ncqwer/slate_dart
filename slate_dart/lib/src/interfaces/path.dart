@@ -4,6 +4,13 @@ import 'package:slate_dart/src/error.dart';
 
 // 暂时缺is&&transform
 
+class Span {
+  final List<int> first;
+  final List<int> second;
+
+  const Span({required this.first, required this.second});
+}
+
 extension ListExtension<T> on List<T> {
   T? atIndex(int idx) {
     if (idx >= length) return null;
@@ -88,7 +95,7 @@ class Path {
     final ap = path.sublist_safe(0, i);
     final bp = another.sublist_safe(0, i);
 
-    return Path.equals(ap, bp) && path[i] <another[i];
+    return Path.equals(ap, bp) && path[i] < another[i];
   }
 
   static bool isAfter(List<int> path, List<int> another) {

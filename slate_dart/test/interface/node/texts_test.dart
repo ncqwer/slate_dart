@@ -12,9 +12,10 @@ void main() {
     final ts = List<NodeEntry>.from(Node.texts(e));
     expect(
         ts,
-        // ignore: unnecessary_cast
         equals([
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'a') as Node, path: [0, 0]),
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'b') as Node, path: [0, 1]),
         ]));
   });
@@ -29,9 +30,9 @@ void main() {
     final ts = List<NodeEntry>.from(Node.texts(e, from: [0, 1]));
     expect(
         ts,
-        // ignore: unnecessary_cast
         equals([
           // NodeEntry(node: Text(key: 'a') as Node, path: [0, 0]),
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'b') as Node, path: [0, 1]),
         ]));
   });
@@ -48,9 +49,10 @@ void main() {
     final ts = List<NodeEntry>.from(Node.texts(e));
     expect(
         ts,
-        // ignore: unnecessary_cast
         equals([
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'a') as Node, path: [0, 0]),
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'b') as Node, path: [1, 0]),
         ]));
   });
@@ -64,9 +66,10 @@ void main() {
     final ts = List<NodeEntry>.from(Node.texts(e, reverse: true));
     expect(
         ts,
-        // ignore: unnecessary_cast
         equals([
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'b') as Node, path: [0, 1]),
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'a') as Node, path: [0, 0]),
         ]));
   });
@@ -83,9 +86,10 @@ void main() {
     final ts = List<NodeEntry>.from(Node.texts(e, from: [0, 1], to: [0, 2]));
     expect(
         ts,
-        // ignore: unnecessary_cast
         equals([
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'b') as Node, path: [0, 1]),
+          // ignore: unnecessary_cast
           NodeEntry(node: Text(key: 'c') as Node, path: [0, 2]),
         ]));
   });
